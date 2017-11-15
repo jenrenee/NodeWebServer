@@ -24,6 +24,7 @@ var app = express();
 // console.log(partialURL);
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
+
 //**************************************************************************************
 // __dirname STORES THE PATH TO THE PROJECTS DIRECTORY - ie NodeWebServer
 // app.use is how you register middleware then provide the middleware to use
@@ -37,7 +38,7 @@ app.set('view engine', 'hbs');
 app.use((request, response, next) => {
     var now = new Date().toString();
     var log = `${now}: ${request.method} ${request.url}`;
-    console.log(log);
+    //console.log(log);
    fs.appendFile('server.log', log + '\n');
     //****************************************************************
     //if using Node 7 or greater the following syntax should be used
@@ -93,6 +94,14 @@ app.get('/', (request, response) => {
     //         'Dogs'
     //     ]
     // })
+});
+
+app.get('/projects', (request, response) => {
+    response.render('projects.hbs', {
+        headerVerbiage: 'Projects',
+        pageTitle: 'Current Projects',
+        welcomeMessage: 'Your projects go here'
+    });
 });
 
 app.get('/about', (request, response) => {
