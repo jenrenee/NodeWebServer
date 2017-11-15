@@ -5,6 +5,12 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+//******************************************************
+// when running through HEROKU, the port will be used
+//  if running locally, we need a default since the 
+//  port environment variable will not exist
+//******************************************************
+const port = process.env.PORT || 3000;
 
 var app = express();
 
@@ -112,6 +118,17 @@ app.get('/bad', (request, response) => {
 // 3000 is a port number
 //app.listen(3000);
 //adding another parameter
-app.listen(3000, () => {
-    console.log("SERVER IS UP ON PORT 3000")
+// app.listen(3000, () => {
+//     console.log("SERVER IS UP ON PORT 3000")
+// });
+//****************************************************************
+//  CONNECTING TO HEROKU UNSING ENVIRONMENT VARIABLE
+//  (THE COMMAND TO SEE ENVIRONMENT VARIABLES IS "ENV" AT THE 
+//      BASH TERMINAL COMMAND LINE)
+//  ALSO - SEE package.json script "start"
+// heroku will be looking for the "start" script to run the app
+//      TO EXECUTE AND USE THE "start" script, run "npm start"
+//****************************************************************
+app.listen(port, () => {
+    console.log(`SERVER IS UP ON PORT ${port}`);
 });
